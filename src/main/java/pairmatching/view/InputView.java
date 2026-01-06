@@ -45,7 +45,7 @@ public class InputView {
     }
 
     private static void validateSeparator(String value) {
-        if (!value.startsWith(",") || !value.endsWith(",")) {
+        if (value.startsWith(",") || value.endsWith(",")) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
 

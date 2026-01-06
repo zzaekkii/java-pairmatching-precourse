@@ -75,6 +75,16 @@ public class OutputView {
 
     public void printMatchingResult(List<Pair> pairs) {
         System.out.println("\n페어 매칭 결과입니다.");
-
+        for (Pair pair : pairs) {
+            List<String> names = pair.getNames();
+            int namesCount = names.size();
+            for (int i = 0; i < namesCount; i++) {
+                if (i != 0) {
+                    System.out.print(" : ");
+                }
+                System.out.print(names.get(i));
+            }
+            System.out.println();
+        }
     }
 }

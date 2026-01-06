@@ -16,8 +16,8 @@ public class Pair {
      * 동일한 페어인지는 크루 닉네임 사전순 정렬로 String을 만들어 equals 오버라이드
      */
     public boolean isEqualsPair(Pair other) {
-        List<String> mine = getPair();
-        List<String> another = other.getPair();
+        List<String> mine = getNames();
+        List<String> another = other.getNames();
 
         Collections.sort(mine);
         Collections.sort(another);
@@ -25,7 +25,7 @@ public class Pair {
         return mine.equals(another);
     }
 
-    public List<String> getPair() {
+    public List<String> getNames() {
         return new ArrayList<>(pair);
     }
 
