@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import pairmatching.domain.Command;
 import pairmatching.domain.Course;
 import pairmatching.domain.Crew;
 import pairmatching.domain.Crews;
@@ -30,7 +31,21 @@ public class MatchingController {
         Missions missions = initializeMissions();
         Crews crews = initializeCrews();
 
+        while (true) {
+            Command command = readFunctionCommand();
 
+        }
+    }
+
+    private Command readFunctionCommand() {
+        while (true) {
+            outputView.printFunctionList();
+            try {
+                return inputView.readFunctionCommand();
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
     }
 
     private Crews initializeCrews() {
@@ -42,18 +57,20 @@ public class MatchingController {
 
     private List<Crew> readBackendCrewsFromMd() {
         try {
-            fileInputView.readBackendCrews();
+            return fileInputView.readBackendCrews();
         } catch (Exception e) {
             outputView.printErrorMessage(e.getMessage());
         }
+        return java.util.Collections.emptyList();
     }
 
     private List<Crew> readFrontendCrewsFromMd() {
         try {
-            fileInputView.readFrontendCrews();
+            return fileInputView.readFrontendCrews();
         } catch (Exception e) {
             outputView.printErrorMessage(e.getMessage());
         }
+        return java.util.Collections.emptyList();
     }
 
     private Missions initializeMissions() {
