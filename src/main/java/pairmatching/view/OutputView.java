@@ -84,7 +84,11 @@ public class OutputView {
                 }
                 System.out.print(names.get(i));
             }
-            System.out.println();
+            System.out.println("\n");
         }
+    }
+
+    public void printClearPair() {
+        System.out.println("\n초기화 되었습니다. \n");
     }
 }

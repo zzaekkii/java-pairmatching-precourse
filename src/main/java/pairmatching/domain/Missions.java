@@ -73,6 +73,20 @@ public class Missions {
         return false;
     }
 
+    public void clearAllPair() {
+        for (Course course : Course.values()) {
+            Map<Level, List<Mission>> levels = missions.get(course);
+
+            for (Level level : Level.values()) {
+                List<Mission> missionsAtLevel = levels.get(level);
+
+                for (Mission mission : missionsAtLevel) {
+                    clearPreviousMatching(mission);
+                }
+            }
+        }
+    }
+
     private void clearPreviousMatching(Mission mission) {
         mission.clearPair();
     }
