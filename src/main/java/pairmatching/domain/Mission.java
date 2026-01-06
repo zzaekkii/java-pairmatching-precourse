@@ -21,7 +21,7 @@ public class Mission {
 
     public boolean isExistPair(Pair newPair) {
         for (Pair pair : pairs) {
-            if (pair.equalsPair(newPair)) {
+            if (pair.equals(newPair)) {
                 return true;
             }
         }

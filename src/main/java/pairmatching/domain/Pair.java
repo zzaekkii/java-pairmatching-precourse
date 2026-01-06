@@ -2,42 +2,42 @@ package pairmatching.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class Pair {
-    private final List<String> pair;
+    private final Set<String> pair;
 
     public Pair(List<String> crewNames) {
-        this.pair = crewNames;
-    }
-
-    /**
-     * TODO!!
-     * 동일한 페어인지는 크루 닉네임 사전순 정렬로 String을 만들어 equals 오버라이드
-     */
-    public boolean equalsPair(Pair other) {
-        List<String> mine = getNames();
-        List<String> another = other.getNames();
-
-        Collections.sort(mine);
-        Collections.sort(another);
-
-        return mine.equals(another);
-    }
-
-    public List<String> getNames() {
-        return new ArrayList<>(pair);
+        this.pair = Collections.unmodifiableSet(new HashSet<>(crewNames));
     }
 
     public String getPairAsString() {
+        List<String> names = new ArrayList<>(pair);
         StringBuilder result = new StringBuilder();
-        int pairCount = pair.size();
+        int pairCount = names.size();
         for (int i = 0; i < pairCount; i++) {
             if (i != 0) {
                 result.append(" : ");
             }
-            result.append(pair.get(i));
+            result.append(names.get(i));
         }
         return result.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Pair pair1 = (Pair) o;
+        return Objects.equals(pair, pair1.pair);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(pair);
     }
 }
