@@ -28,6 +28,16 @@ public enum MissionInfo {
         this.level = level;
     }
 
+    public static MissionInfo fromLevelAndMissionName(Level level, String name) {
+        List<MissionInfo> missions = fromLevel(level);
+        for (MissionInfo mission : missions) {
+            if (mission.name.equals(name)) {
+                return mission;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.MISSION_NOT_FOUND.getMessage());
+    }
+
     public static List<MissionInfo> fromLevel(Level level) {
         List<MissionInfo> levels = new ArrayList<>();
         for (MissionInfo mission : MissionInfo.values()) {
@@ -38,12 +48,11 @@ public enum MissionInfo {
         return levels;
     }
 
-    public static MissionInfo fromMissionName(String name) {
-        for (MissionInfo mission : MissionInfo.values()) {
-            if (mission.name.equals(name)) {
-                return mission;
-            }
-        }
-        throw new IllegalArgumentException(ErrorMessage.MISSION_NOT_FOUND.getMessage());
+    public Level getLevel() {
+        return level;
+    }
+
+    public String getName() {
+        return name;
     }
 }

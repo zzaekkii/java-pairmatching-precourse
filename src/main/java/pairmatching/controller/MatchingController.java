@@ -11,7 +11,9 @@ import pairmatching.domain.Crews;
 import pairmatching.domain.Level;
 import pairmatching.domain.Mission;
 import pairmatching.domain.MissionInfo;
+import pairmatching.domain.MissionToFind;
 import pairmatching.domain.Missions;
+import pairmatching.domain.Pair;
 import pairmatching.view.FileInputView;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -34,6 +36,9 @@ public class MatchingController {
         while (true) {
             Command command = readFunctionCommand();
 
+            if (command.equals(Command.MATCHING_PAIR)) {
+                matchingPair(missions, crews);
+            }
         }
     }
 
@@ -42,6 +47,41 @@ public class MatchingController {
             outputView.printFunctionList();
             try {
                 return inputView.readFunctionCommand();
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private void matchingPair(Missions missions, Crews crews) {
+        MissionToFind missionToFind = getMissionToFind();
+
+        if (missions.isMatchingExist(missionToFind)) {
+            if (!getYesOrNo()) {
+                return;
+            }
+        }
+
+        List<Pair> pairs = missions.matchingPair(missionToFind, crews);
+        outputView.printMatchingResult(pairs);
+    }
+
+    private boolean getYesOrNo() {
+        while (true) {
+            outputView.printReMatchingRequest();
+            try {
+                return inputView.readYesOrNo();
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private MissionToFind getMissionToFind() {
+        while (true) {
+            outputView.printMissionList();
+            try {
+                return inputView.readCourseAndMissionInfo();
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }

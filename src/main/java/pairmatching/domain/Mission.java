@@ -10,4 +10,29 @@ public class Mission {
     public Mission(MissionInfo info) {
         this.info = info;
     }
+
+    public void setPairs(List<Pair> pairs) {
+        this.pairs = pairs;
+    }
+
+    public void clearPair() {
+        pairs.clear();
+    }
+
+    public MissionInfo getInfo() {
+        return info;
+    }
+
+    public boolean isExistPair(Pair newPair) {
+        for (Pair pair : pairs) {
+            if (pair.equals(newPair)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isMatching() {
+        return !pairs.isEmpty();
+    }
 }

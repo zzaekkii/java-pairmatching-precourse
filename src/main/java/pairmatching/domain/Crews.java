@@ -12,10 +12,18 @@ public class Crews {
         this.crews = crews;
     }
 
-    public List<Crew> getCrews(Course course) {
+    public List<String> getCrewsNames(Course course) {
         if (!crews.containsKey(course)) {
             throw new IllegalArgumentException(ErrorMessage.ETC.getMessage());
         }
-        return new ArrayList<>(crews.get(course));
+        return new ArrayList<>(getNames(crews.get(course)));
+    }
+
+    private static List<String> getNames(List<Crew> crewList) {
+        List<String> names = new ArrayList<>();
+        for (Crew crew : crewList) {
+            names.add(crew.getName());
+        }
+        return names;
     }
 }
