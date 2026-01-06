@@ -1,5 +1,8 @@
 package pairmatching.controller;
 
+import static pairmatching.domain.Command.MATCHING_PAIR;
+import static pairmatching.domain.Command.QUIT;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,8 +39,12 @@ public class MatchingController {
         while (true) {
             Command command = readFunctionCommand();
 
-            if (command.equals(Command.MATCHING_PAIR)) {
+            if (command.equals(MATCHING_PAIR)) {
                 matchingPair(missions, crews);
+            }
+
+            if (command.equals(QUIT)) {
+                break;
             }
         }
     }
