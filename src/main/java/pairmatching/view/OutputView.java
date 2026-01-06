@@ -76,8 +76,9 @@ public class OutputView {
     public void printMatchingResult(List<Pair> pairs) {
         System.out.println("\n페어 매칭 결과입니다.");
         for (Pair pair : pairs) {
-            System.out.println(pair.getPairAsString() + "\n");
+            System.out.println(pair.getPairAsString());
         }
+        System.out.println();
     }
 
     public void printClearPair() {
