@@ -19,6 +19,7 @@ import pairmatching.domain.MissionInfo;
 import pairmatching.domain.MissionToFind;
 import pairmatching.domain.Missions;
 import pairmatching.domain.Pair;
+import pairmatching.exception.ErrorMessage;
 import pairmatching.view.FileInputView;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -85,6 +86,12 @@ public class MatchingController {
 
     private void checkPair(Missions missions) {
         Mission mission = missions.getMission(getMissionToFind());
+
+        if (!mission.isMatching()) {
+            outputView.printErrorMessage(ErrorMessage.MATCHING_NOT_FOUND.getMessage());
+            return;
+        }
+
         outputView.printMatchingResult(mission.getPairs());
     }
 

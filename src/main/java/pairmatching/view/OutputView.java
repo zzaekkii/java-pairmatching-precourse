@@ -9,7 +9,7 @@ import pairmatching.domain.Pair;
 
 public class OutputView {
     public void printErrorMessage(String message) {
-        System.out.println(message);
+        System.out.println(message + "\n");
     }
 
     public void printFunctionList() {
