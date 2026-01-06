@@ -19,7 +19,7 @@ public class Missions {
     public List<Pair> matchingPair(MissionToFind missionToFind, Crews crews) {
         Level level = missionToFind.getMissionInfo().getLevel();
         List<Mission> missionsAtLevel = missions.get(missionToFind.getCourse()).get(level);
-        Mission mission = getMission(missionToFind, missionsAtLevel);
+        Mission mission = getMissionAtLevel(missionToFind, missionsAtLevel);
         clearPreviousMatching(mission);
 
         List<String> crewNames = crews.getCrewsNames(missionToFind.getCourse());
@@ -109,7 +109,7 @@ public class Missions {
         return Randoms.shuffle(crewList);
     }
 
-    private Mission getMission(MissionToFind missionToFind, List<Mission> missionsAtLevel) {
+    private Mission getMissionAtLevel(MissionToFind missionToFind, List<Mission> missionsAtLevel) {
         for (Mission mission : missionsAtLevel) {
             if (!mission.getInfo().equals(missionToFind.getMissionInfo())) {
                 continue;
@@ -119,16 +119,9 @@ public class Missions {
         throw new IllegalArgumentException(ErrorMessage.MISSION_NOT_FOUND.getMessage());
     }
 
-    public List<Mission> getMissions(Course course, Level level) {
-        if (!missions.containsKey(course)) {
-            throw new IllegalArgumentException(ErrorMessage.MISSION_NOT_FOUND.getMessage());
-        }
-
-        Map<Level, List<Mission>> levels = missions.get(course);
-        if (!levels.containsKey(level)) {
-            throw new IllegalArgumentException(ErrorMessage.MISSION_NOT_FOUND.getMessage());
-        }
-
-        return new ArrayList<>(levels.get(level));
+    public Mission getMission(MissionToFind missionToFind) {
+        Level level = missionToFind.getMissionInfo().getLevel();
+        List<Mission> missionsAtLevel = missions.get(missionToFind.getCourse()).get(level);
+        return getMissionAtLevel(missionToFind, missionsAtLevel);
     }
 }

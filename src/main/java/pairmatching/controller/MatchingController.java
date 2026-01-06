@@ -1,5 +1,6 @@
 package pairmatching.controller;
 
+import static pairmatching.domain.Command.CHECK_PAIR;
 import static pairmatching.domain.Command.CLEAR_PAIR;
 import static pairmatching.domain.Command.MATCHING_PAIR;
 import static pairmatching.domain.Command.QUIT;
@@ -44,6 +45,10 @@ public class MatchingController {
                 matchingPair(missions, crews);
             }
 
+            if (command.equals(CHECK_PAIR)) {
+                checkPair(missions);
+            }
+
             if (command.equals(CLEAR_PAIR)) {
                 clearAllPair(missions);
             }
@@ -76,6 +81,11 @@ public class MatchingController {
 
         List<Pair> pairs = missions.matchingPair(missionToFind, crews);
         outputView.printMatchingResult(pairs);
+    }
+
+    private void checkPair(Missions missions) {
+        Mission mission = missions.getMission(getMissionToFind());
+        outputView.printMatchingResult(mission.getPairs());
     }
 
     private void clearAllPair(Missions missions) {

@@ -19,13 +19,9 @@ public class Mission {
         pairs.clear();
     }
 
-    public MissionInfo getInfo() {
-        return info;
-    }
-
     public boolean isExistPair(Pair newPair) {
         for (Pair pair : pairs) {
-            if (pair.equals(newPair)) {
+            if (pair.equalsPair(newPair)) {
                 return true;
             }
         }
@@ -34,5 +30,13 @@ public class Mission {
 
     public boolean isMatching() {
         return !pairs.isEmpty();
+    }
+
+    public MissionInfo getInfo() {
+        return info;
+    }
+
+    public List<Pair> getPairs() {
+        return new ArrayList<>(pairs);
     }
 }
